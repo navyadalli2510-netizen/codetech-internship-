@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Engineering Quiz Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+
+--bg:#07111f;
+--card:#101c2c;
+--primary:#00d9ff;
+--secondary:#6fffe9;
+--text:#ecf7ff;
+--success:#17ff8c;
+--danger:#ff4f6d;
+--muted:#8ca7c5;
+
+--lightbg:#eef5ff;
+--lightcard:#ffffff;
+--lighttext:#0f172a;
+--lightborder:rgba(0,140,255,0.12);
+}
+
+body{
+
+min-height:100vh;
+
+font-family:'JetBrains Mono', monospace;
+
+background:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+var(--bg);
+
+background-size:40px 40px;
+
+color:var(--text);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+overflow-x:hidden;
+
+transition:0.35s ease;
+}
+
+/* DARK CONTAINER */
+
+.container{
+
+width:100%;
+max-width:1000px;
+
+background:rgba(16,28,44,0.95);
+
+border:1px solid rgba(0,217,255,0.2);
+
+border-radius:24px;
+
+padding:30px;
+
+box-shadow:0 0 25px rgba(0,217,255,0.15);
+
+position:relative;
+
+overflow:hidden;
+
+backdrop-filter:blur(12px);
+}
+
+.container::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+radial-gradient(circle at top right,
+rgba(0,217,255,0.15),
+transparent 35%);
+
+pointer-events:none;
+}
+
+/* LIGHT THEME */
+
+.light-mode{
+
+background:
+linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+linear-gradient(to bottom right,#eef5ff,#dbeafe,#f8fbff);
+
+background-size:40px 40px;
+
+color:var(--lighttext);
+}
+
+.light-mode .container{
+
+background:rgba(255,255,255,0.88);
+
+border:1px solid var(--lightborder);
+
+box-shadow:
+0 10px 40px rgba(0,140,255,0.10);
+
+color:var(--lighttext);
+}
+
+.light-mode .container::before{
+
+background:
+radial-gradient(circle at top right,
+rgba(0,140,255,0.10),
+transparent 35%);
+}
+
+/* LOGO */
+
+.logo{
+
+font-size:4rem;
+
+font-family:'Rajdhani', sans-serif;
+
+color:var(--primary);
+
+text-shadow:0 0 18px rgba(0,217,255,0.5);
+
+margin-bottom:15px;
+
+text-align:center;
+
+line-height:1.1;
+}
+
+.light-mode .logo{
+
+color:#0077cc;
+
+text-shadow:none;
+}
+
+/* TEXT */
+
+.tagline{
+
+text-align:center;
+
+color:var(--muted);
+
+margin-bottom:30px;
+
+font-size:1.1rem;
+
+line-height:1.5;
+}
+
+.light-mode .tagline{
+
+color:#475569;
+}
+
+.title{
+
+text-align:center;
+
+color:var(--primary);
+
+font-size:2.8rem;
+
+margin-bottom:15px;
+
+font-family:'Rajdhani', sans-serif;
+}
+
+.light-mode .title{
+
+color:#0077cc;
+}
+
+.welcome{
+
+text-align:center;
+
+color:var(--secondary);
+}
+
+.light-mode .welcome{
+
+color:#0077cc;
+}
+
+/* INPUT */
+
+.name-input{
+
+width:100%;
+max-width:450px;
+
+padding:18px;
+
+border-radius:14px;
+
+border:1px solid rgba(0,217,255,0.3);
+
+background:#122238;
+
+color:white;
+
+font-size:1rem;
+
+outline:none;
+
+transition:0.3s;
+}
+
+.name-input:focus{
+
+border-color:var(--primary);
+
+box-shadow:0 0 15px rgba(0,217,255,0.2);
+}
+
+.light-mode .name-input{
+
+background:white;
+
+color:#0f172a;
+
+border:1px solid rgba(0,140,255,0.15);
+}
+
+/* BUTTON */
+
+.btn{
+
+margin-top:15px;
+
+padding:14px 24px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(to right,var(--primary),#00a8ff);
+
+color:#00131f;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.3s;
+
+font-family:inherit;
+}
+
+.btn:hover{
+
+transform:translateY(-2px) scale(1.03);
+
+box-shadow:0 0 20px rgba(0,217,255,0.35);
+}
+
+.light-mode .btn{
+
+background:linear-gradient(to right,#0077ff,#00b7ff);
+
+color:white;
+}
+
+/* THEME BUTTON */
+
+.toggle-theme{
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+
+padding:12px 18px;
+
+min-width:130px;
+height:48px;
+
+border:none;
+border-radius:14px;
+
+background:linear-gradient(
+135deg,
+#00d9ff,
+#00a8ff
+);
+
+color:#00131f;
+
+font-size:0.95rem;
+font-weight:700;
+
+cursor:pointer;
+
+box-shadow:
+0 8px 22px rgba(0,217,255,0.28);
+
+transition:0.3s ease;
+
+z-index:100;
+}
+
+.toggle-theme:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 12px 28px rgba(0,217,255,0.38);
+}
+
+.light-mode .toggle-theme{
+
+background:linear-gradient(
+135deg,
+#0077ff,
+#00b7ff
+);
+
+color:white;
+
+box-shadow:
+0 8px 22px rgba(0,140,255,0.22);
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-top:25px;
+}
+
+/* CARD */
+
+.card{
+
+background:#122238;
+
+border:1px solid rgba(0,217,255,0.15);
+
+padding:24px;
+
+border-radius:18px;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+border-color:var(--primary);
+
+box-shadow:0 0 20px rgba(0,217,255,0.25);
+}
+
+.card h3{
+
+color:var(--primary);
+
+margin-bottom:10px;
+
+font-size:1.5rem;
+
+font-family:'Rajdhani', sans-serif;
+}
+
+.light-mode .card{
+
+background:white;
+
+border:1px solid rgba(0,140,255,0.10);
+
+box-shadow:0 6px 18px rgba(0,0,0,0.04);
+}
+
+.light-mode .card:hover{
+
+border-color:#009dff;
+
+box-shadow:0 12px 25px rgba(0,140,255,0.15);
+}
+
+/* SELECT */
+
+select{
+
+margin-top:12px;
+
+padding:12px;
+
+border-radius:10px;
+
+border:none;
+
+background:#122238;
+
+color:white;
+
+font-family:inherit;
+
+outline:none;
+}
+
+.light-mode select{
+
+background:white;
+
+color:#0f172a;
+
+border:1px solid rgba(0,140,255,0.15);
+}
+
+/* TOP BAR */
+
+.top-bar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+margin-bottom:18px;
+}
+
+/* TIMER */
+
+.timer{
+
+color:var(--secondary);
+
+font-weight:bold;
+}
+
+.light-mode .timer{
+
+color:#0077cc;
+}
+
+/* PROGRESS */
+
+.progress-container{
+
+width:100%;
+
+height:12px;
+
+background:#1b2f48;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-bottom:25px;
+}
+
+.light-mode .progress-container{
+
+background:#dbeafe;
+}
+
+.progress{
+
+height:100%;
+
+width:100%;
+
+background:linear-gradient(to right,var(--primary),var(--secondary));
+
+transition:width 1s linear;
+}
+
+/* QUESTION */
+
+.question{
+
+font-size:1.3rem;
+
+margin-bottom:25px;
+
+line-height:1.6;
+}
+
+/* OPTIONS */
+
+.options{
+
+display:grid;
+
+gap:15px;
+}
+
+.option-btn{
+
+padding:16px;
+
+border:none;
+
+border-radius:14px;
+
+background:#15293f;
+
+color:white;
+
+text-align:left;
+
+cursor:pointer;
+
+transition:0.25s;
+
+font-size:1rem;
+}
+
+.option-btn:hover{
+
+transform:translateX(5px);
+
+border:1px solid var(--primary);
+
+box-shadow:0 0 15px rgba(0,217,255,0.25);
+}
+
+.light-mode .option-btn{
+
+background:white;
+
+color:#0f172a;
+
+border:1px solid rgba(0,140,255,0.08);
+}
+
+.light-mode .option-btn:hover{
+
+background:#f0f8ff;
+
+border-color:#00a8ff;
+}
+
+/* ANSWERS */
+
+.correct{
+
+background:rgba(23,255,140,0.15);
+
+border:1px solid var(--success);
+
+color:var(--success);
+}
+
+.wrong{
+
+background:rgba(255,79,109,0.12);
+
+border:1px solid var(--danger);
+
+color:var(--danger);
+}
+
+/* SCORE */
+
+.score{
+
+font-size:4rem;
+
+color:var(--primary);
+
+margin:20px 0;
+
+text-shadow:0 0 15px rgba(0,217,255,0.35);
+
+text-align:center;
+}
+
+.light-mode .score{
+
+color:#0077cc;
+
+text-shadow:none;
+}
+
+/* STATS */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+
+gap:15px;
+
+margin-top:25px;
+}
+
+.stat{
+
+background:#122238;
+
+padding:18px;
+
+border-radius:14px;
+
+border:1px solid rgba(0,217,255,0.15);
+
+text-align:center;
+}
+
+.light-mode .stat{
+
+background:white;
+
+border:1px solid rgba(0,140,255,0.10);
+
+box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+
+/* BADGE */
+
+.badge{
+
+margin-top:25px;
+
+padding:18px;
+
+background:#102033;
+
+border-radius:14px;
+
+color:var(--secondary);
+
+border:1px solid rgba(0,217,255,0.15);
+
+text-align:center;
+}
+
+.light-mode .badge{
+
+background:#eef7ff;
+
+border:1px solid rgba(0,140,255,0.12);
+
+color:#0077cc;
+}
+
+/* LEADERBOARD */
+
+.leaderboard{
+
+margin-top:25px;
+}
+
+.leaderboard-item{
+
+padding:12px;
+
+background:#122238;
+
+margin-top:10px;
+
+border-radius:12px;
+}
+
+.light-mode .leaderboard-item{
+
+background:white;
+
+border:1px solid rgba(0,140,255,0.10);
+
+color:#0f172a;
+}
+
+/* UTILITIES */
+
+.hidden{
+display:none;
+}
+
+.center{
+text-align:center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.logo{
+font-size:2.7rem;
+padding-top:55px;
+}
+
+.title{
+font-size:2rem;
+}
+
+.question{
+font-size:1.05rem;
+}
+
+.score{
+font-size:3rem;
+}
+
+.container{
+padding:20px;
+}
+
+.toggle-theme{
+
+top:15px;
+right:15px;
+
+min-width:115px;
+
+height:44px;
+
+padding:10px 16px;
+
+font-size:0.9rem;
+}
+}
+
+@media(max-width:480px){
+
+.top-bar{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.btn{
+width:80%;
+}
+
+.logo{
+font-size:2rem;
+padding-top:60px;
+}
+
+.question{
+font-size:1rem;
+}
+
+.option-btn{
+padding:14px;
+font-size:0.95rem;
+}
+
+.toggle-theme{
+
+position:absolute;
+
+top:12px;
+right:35px;
+
+min-width:90px;
+
+height:40px;
+
+font-size:0.85rem;
+
+padding:9px;
+}
+
+.container{
+padding:18px;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LANDING -->
+
+<div id="landingPage">
+
+<h1 class="logo">
+ENGINEERING QUIZ HUB
+</h1>
+<p class="tagline">
+Futuristic Quiz Dashboard for Engineering Students
+</p>
+
+<div class="center">
+
+<input
+type="text"
+id="playerName"
+class="name-input"
+placeholder="Enter Your Name"
+/>
+
+<br>
+
+<button class="btn" onclick="enterApp()">
+ENTER DASHBOARD
+</button>
+
+<button class="btn toggle-theme" onclick="toggleTheme()">
+🌙 Theme
+</button>
+
+
+</div>
+
+</div>
+
+<!-- START PAGE -->
+
+<div id="startPage" class="hidden">
+
+<h2 class="welcome" id="welcomeText"></h2>
+
+<h1 class="title">
+SELECT CATEGORY
+</h1>
+
+<div class="grid">
+
+<div class="card" onclick="startQuiz('DSA')">
+<h3>DSA</h3>
+<p>30 Questions</p>
+</div>
+
+<div class="card" onclick="startQuiz('OS')">
+<h3>OS</h3>
+<p>30 Questions</p>
+</div>
+
+<div class="card" onclick="startQuiz('DBMS')">
+<h3>DBMS</h3>
+<p>30 Questions</p>
+</div>
+
+<div class="card" onclick="startQuiz('Networks')">
+<h3>Networks</h3>
+<p>30 Questions</p>
+</div>
+
+<div class="card" onclick="startQuiz('C/C++')">
+<h3>C/C++</h3>
+<p>30 Questions</p>
+</div>
+
+</div>
+
+<div class="center" style="margin-top:30px;">
+
+<label>Select Difficulty</label>
+
+<br>
+
+<select id="difficulty">
+
+<option value="Easy">Easy</option>
+
+<option value="Medium">Medium</option>
+
+<option value="Hard">Hard</option>
+
+</select>
+
+<h3 style="margin-top:20px;" id="highScoreText"></h3>
+
+<button class="btn" onclick="goToLanding()">
+⬅ BACK
+</button>
+
+</div>
+
+</div>
+
+<!-- QUIZ PAGE -->
+
+<div id="quizPage" class="hidden">
+
+<div class="top-bar">
+
+<h2 id="questionCount">
+Question 1/10
+</h2>
+
+<div class="timer">
+⏳ <span id="timer">30</span>s
+</div>
+
+<button class="btn" onclick="goToCategories()">
+⬅ BACK
+</button>
+
+</div>
+
+<div class="progress-container">
+
+<div class="progress" id="progressBar"></div>
+
+</div>
+
+<h2 class="question" id="question"></h2>
+
+<div class="options" id="options"></div>
+
+</div>
+
+<!-- RESULT PAGE -->
+
+<div id="resultPage" class="hidden">
+
+<h1 class="title">
+QUIZ COMPLETE
+</h1>
+
+<div class="score" id="finalScore"></div>
+
+<h2 class="center" id="grade"></h2>
+
+<p class="center" id="message"></p>
+
+<div class="stats">
+
+<div class="stat">
+<h3>Correct</h3>
+<p id="correctCount"></p>
+</div>
+
+<div class="stat">
+<h3>Wrong</h3>
+<p id="wrongCount"></p>
+</div>
+
+<div class="stat">
+<h3>Percentage</h3>
+<p id="percentage"></p>
+</div>
+
+</div>
+
+<div class="badge" id="badge"></div>
+
+<div class="center">
+
+<button class="btn" onclick="retakeQuiz()">
+RETAKE QUIZ
+</button>
+
+<button class="btn" onclick="goToCategories()">
+HOME
+</button>
+
+</div>
+
+<div class="leaderboard">
+
+<h2 style="margin-top:25px;">
+🏆 Leaderboard
+</h2>
+
+<div id="leaderboardList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let playerName = "";
+
+let currentQuestions = [];
+
+let currentIndex = 0;
+
+let score = 0;
+
+let timer;
+
+let timeLeft = 30;
+
+let selectedCategory = "";
+
+/* REAL QUESTIONS */
+
+const questions = [
+
+{
+question:"Which data structure uses FIFO?",
+options:["Stack","Queue","Tree","Graph"],
+answer:"Queue",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Which data structure uses LIFO?",
+options:["Queue","Stack","Linked List","Heap"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Binary Search works on?",
+options:["Sorted Array","Unsorted Array","Linked List","Graph"],
+answer:"Sorted Array",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Which traversal visits Root Left Right?",
+options:["Inorder","Postorder","Preorder","Level Order"],
+answer:"Preorder",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Time complexity of linear search?",
+options:["O(log n)","O(n)","O(1)","O(n²)"],
+answer:"O(n)",
+category:"DSA",
+difficulty:"Easy"
+},
+{
+question:"Which data structure uses LIFO?",
+options:["Queue","Stack","Tree","Graph"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Easy"
+},
+{
+question:"Which traversal method uses a queue?",
+options:["DFS","BFS","Inorder","Postorder"],
+answer:"BFS",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Which data structure stores elements in key-value pairs?",
+options:["Stack","Queue","HashMap","Tree"],
+answer:"HashMap",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Which sorting algorithm repeatedly swaps adjacent elements?",
+options:["Merge Sort","Quick Sort","Bubble Sort","Heap Sort"],
+answer:"Bubble Sort",
+category:"DSA",
+difficulty:"Easy"
+},
+
+{
+question:"Which data structure is used for recursion?",
+options:["Queue","Array","Stack","Linked List"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Easy"
+},
+{
+question:"Which SQL command removes table?",
+options:["DELETE","REMOVE","DROP","CLEAR"],
+answer:"DROP",
+category:"DBMS",
+difficulty:"Easy"
+},
+{
+question:"Which SQL command is used to retrieve data?",
+options:["GET","SELECT","FETCH","OPEN"],
+answer:"SELECT",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL clause is used to filter records?",
+options:["ORDER BY","GROUP BY","WHERE","HAVING"],
+answer:"WHERE",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL command is used to add new data?",
+options:["INSERT","ADD","UPDATE","CREATE"],
+answer:"INSERT",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which key uniquely identifies a row in a table?",
+options:["Foreign Key","Primary Key","Candidate Key","Alternate Key"],
+answer:"Primary Key",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL command removes all rows but keeps the table?",
+options:["DROP","DELETE","TRUNCATE","REMOVE"],
+answer:"TRUNCATE",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL clause is used to sort data?",
+options:["GROUP BY","WHERE","ORDER BY","SORT"],
+answer:"ORDER BY",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL function returns the number of rows?",
+options:["SUM()","COUNT()","TOTAL()","ROWS()"],
+answer:"COUNT()",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which command is used to modify existing data?",
+options:["ALTER","UPDATE","CHANGE","MODIFY"],
+answer:"UPDATE",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which SQL statement is used to remove a table?",
+options:["DELETE","REMOVE","DROP","TRUNCATE"],
+answer:"DROP",
+category:"DBMS",
+difficulty:"Easy"
+},
+
+{
+question:"Which layer handles routing?",
+options:["Transport","Session","Network","Physical"],
+answer:"Network",
+category:"Networks",
+difficulty:"Easy"
+},
+{
+question:"Which device connects multiple networks together?",
+options:["Hub","Switch","Router","Repeater"],
+answer:"Router",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which protocol is used to browse websites?",
+options:["FTP","HTTP","SMTP","SNMP"],
+answer:"HTTP",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which layer of OSI model handles routing?",
+options:["Transport","Session","Network","Physical"],
+answer:"Network",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"What does IP stand for?",
+options:[
+"Internet Protocol",
+"Internal Process",
+"Internet Process",
+"Integrated Protocol"
+],
+answer:"Internet Protocol",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which protocol is used to send emails?",
+options:["HTTP","FTP","SMTP","TCP"],
+answer:"SMTP",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which device forwards data using MAC addresses?",
+options:["Router","Switch","Gateway","Modem"],
+answer:"Switch",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which topology connects all devices to a central hub?",
+options:["Bus","Ring","Star","Mesh"],
+answer:"Star",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"Which protocol transfers files between computers?",
+options:["FTP","SMTP","DNS","ARP"],
+answer:"FTP",
+category:"Networks",
+difficulty:"Easy"
+},
+
+{
+question:"What is the full form of LAN?",
+options:[
+"Local Area Network",
+"Large Area Network",
+"Logical Access Network",
+"Line Area Network"
+],
+answer:"Local Area Network",
+category:"Networks",
+difficulty:"Easy"
+},
+{
+question:"Which component is called the brain of the computer?",
+options:["RAM","CPU","Hard Disk","Monitor"],
+answer:"CPU",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which operating system is open source?",
+options:["Windows","Linux","macOS","iOS"],
+answer:"Linux",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which scheduling algorithm works on First Come First Serve basis?",
+options:["FCFS","SJF","Round Robin","Priority"],
+answer:"FCFS",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which memory is temporary?",
+options:["ROM","Hard Disk","RAM","SSD"],
+answer:"RAM",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"What is the main function of an operating system?",
+options:[
+"Compile Programs",
+"Manage Computer Resources",
+"Design Hardware",
+"Create Databases"
+],
+answer:"Manage Computer Resources",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which OS allows multiple users at the same time?",
+options:[
+"Single User OS",
+"Multi User OS",
+"Batch OS",
+"Embedded OS"
+],
+answer:"Multi User OS",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which memory stores booting instructions?",
+options:["RAM","Cache","ROM","Register"],
+answer:"ROM",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Round Robin scheduling mainly uses?",
+options:["Stack","Queue","Priority Heap","Tree"],
+answer:"Queue",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which of these is not an operating system?",
+options:["Linux","Windows","Oracle","macOS"],
+answer:"Oracle",
+category:"OS",
+difficulty:"Easy"
+},
+
+{
+question:"Which technique allows multiple programs in memory?",
+options:[
+"Multiprogramming",
+"Paging",
+"Fragmentation",
+"Spooling"
+],
+answer:"Multiprogramming",
+category:"OS",
+difficulty:"Easy"
+},
+{
+question:"Which symbol is used to end a statement in C?",
+options:[".",";",":",","],
+answer:";",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which function is used to print output in C?",
+options:["cin","printf()","cout","scanf()"],
+answer:"printf()",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which keyword is used to define a class in C++?",
+options:["struct","class","object","define"],
+answer:"class",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which operator is used for address of variable?",
+options:["*","%","&","@"],
+answer:"&",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which loop executes at least once?",
+options:["for","while","do while","nested for"],
+answer:"do while",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which header file is used for input and output in C?",
+options:["math.h","string.h","stdio.h","conio.h"],
+answer:"stdio.h",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which keyword is used to inherit a class in C++?",
+options:["extends","inherits",":","super"],
+answer:":",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which data type stores decimal values?",
+options:["int","char","float","bool"],
+answer:"float",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which function is used to take input in C?",
+options:["printf()","cin","scanf()","cout"],
+answer:"scanf()",
+category:"C/C++",
+difficulty:"Easy"
+},
+
+{
+question:"Which concept allows same function name with different parameters?",
+options:[
+"Inheritance",
+"Encapsulation",
+"Polymorphism",
+"Abstraction"
+],
+answer:"Polymorphism",
+category:"C/C++",
+difficulty:"Easy"
+},
+{
+question:"What is the worst case time complexity of Binary Search?",
+options:["O(n)","O(log n)","O(n log n)","O(1)"],
+answer:"O(log n)",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which data structure is used in Breadth First Search?",
+options:["Stack","Queue","Heap","Tree"],
+answer:"Queue",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which sorting algorithm uses divide and conquer?",
+options:["Bubble Sort","Selection Sort","Merge Sort","Insertion Sort"],
+answer:"Merge Sort",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which traversal method is used in Depth First Search?",
+options:["Queue","Stack","Array","Linked List"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"What is the height of a balanced binary tree with n nodes?",
+options:["O(n)","O(log n)","O(n²)","O(1)"],
+answer:"O(log n)",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which data structure is mainly used for recursion?",
+options:["Queue","Heap","Stack","Graph"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which algorithm is used to find shortest path in weighted graph?",
+options:["DFS","BFS","Dijkstra","Prim"],
+answer:"Dijkstra",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which data structure is used for implementing priority queue?",
+options:["Array","Heap","Linked List","Stack"],
+answer:"Heap",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"Which traversal of BST gives sorted order?",
+options:["Preorder","Postorder","Inorder","Level Order"],
+answer:"Inorder",
+category:"DSA",
+difficulty:"Medium"
+},
+
+{
+question:"What is the average case complexity of Quick Sort?",
+options:["O(n²)","O(log n)","O(n log n)","O(1)"],
+answer:"O(n log n)",
+category:"DSA",
+difficulty:"Medium"
+},
+{
+question:"Which normalization form removes partial dependency?",
+options:["1NF","2NF","3NF","BCNF"],
+answer:"2NF",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which SQL clause is used with aggregate functions?",
+options:["ORDER BY","HAVING","WHERE","GROUP BY"],
+answer:"GROUP BY",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which key creates relationship between two tables?",
+options:["Primary Key","Candidate Key","Foreign Key","Super Key"],
+answer:"Foreign Key",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which command is used to change table structure?",
+options:["UPDATE","MODIFY","ALTER","CHANGE"],
+answer:"ALTER",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which join returns all matching and non matching rows from both tables?",
+options:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"],
+answer:"FULL OUTER JOIN",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which index improves search performance in DBMS?",
+options:["Primary Index","Hash Index","Clustered Index","All of these"],
+answer:"All of these",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which SQL function returns average value?",
+options:["SUM()","AVG()","COUNT()","MAX()"],
+answer:"AVG()",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which transaction property ensures data consistency?",
+options:["Atomicity","Isolation","Durability","Consistency"],
+answer:"Consistency",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which normal form removes transitive dependency?",
+options:["1NF","2NF","3NF","4NF"],
+answer:"3NF",
+category:"DBMS",
+difficulty:"Medium"
+},
+
+{
+question:"Which command permanently saves transaction changes?",
+options:["SAVE","COMMIT","ROLLBACK","MERGE"],
+answer:"COMMIT",
+category:"DBMS",
+difficulty:"Medium"
+},
+{
+question:"Which protocol converts domain names into IP addresses?",
+options:["HTTP","DNS","FTP","SMTP"],
+answer:"DNS",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which layer of OSI model handles encryption and decryption?",
+options:["Presentation","Session","Transport","Application"],
+answer:"Presentation",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which protocol is connection oriented?",
+options:["UDP","IP","TCP","ARP"],
+answer:"TCP",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"What is the default port number of HTTP?",
+options:["21","25","80","443"],
+answer:"80",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which device operates at Data Link layer?",
+options:["Hub","Switch","Repeater","Router"],
+answer:"Switch",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which protocol is used to automatically assign IP addresses?",
+options:["DNS","DHCP","ARP","ICMP"],
+answer:"DHCP",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which topology provides highest fault tolerance?",
+options:["Bus","Ring","Star","Mesh"],
+answer:"Mesh",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which command checks network connectivity?",
+options:["ipconfig","ping","tracert","netstat"],
+answer:"ping",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which layer ensures reliable data transfer?",
+options:["Physical","Transport","Network","Session"],
+answer:"Transport",
+category:"Networks",
+difficulty:"Medium"
+},
+
+{
+question:"Which protocol is used for secure web communication?",
+options:["HTTP","FTP","HTTPS","SMTP"],
+answer:"HTTPS",
+category:"Networks",
+difficulty:"Medium"
+},
+{
+question:"Which scheduling algorithm uses time quantum?",
+options:["FCFS","SJF","Round Robin","Priority"],
+answer:"Round Robin",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Deadlock occurs when?",
+options:[
+"CPU is idle",
+"Processes wait forever",
+"Memory is empty",
+"Cache is full"
+],
+answer:"Processes wait forever",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which memory management technique avoids external fragmentation?",
+options:["Paging","Swapping","Segmentation","Compaction"],
+answer:"Paging",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which system call creates a new process in UNIX?",
+options:["exec()","fork()","wait()","exit()"],
+answer:"fork()",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which scheduling algorithm gives minimum average waiting time?",
+options:["FCFS","Round Robin","SJF","FIFO"],
+answer:"SJF",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which state comes after ready state?",
+options:["Waiting","Running","Terminated","Blocked"],
+answer:"Running",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Thrashing occurs due to?",
+options:[
+"Low CPU usage",
+"Excessive paging",
+"High cache memory",
+"Disk formatting"
+],
+answer:"Excessive paging",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which OS concept allows multiple tasks simultaneously?",
+options:[
+"Batch Processing",
+"Multitasking",
+"Spooling",
+"Fragmentation"
+],
+answer:"Multitasking",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Semaphore is used for?",
+options:[
+"Memory allocation",
+"Process synchronization",
+"Scheduling",
+"Disk management"
+],
+answer:"Process synchronization",
+category:"OS",
+difficulty:"Medium"
+},
+
+{
+question:"Which page replacement algorithm replaces oldest page?",
+options:["LRU","FIFO","Optimal","LFU"],
+answer:"FIFO",
+category:"OS",
+difficulty:"Medium"
+},
+{
+question:"Which concept allows multiple functions with same name in C++?",
+options:[
+"Inheritance",
+"Function Overloading",
+"Encapsulation",
+"Abstraction"
+],
+answer:"Function Overloading",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which operator is used to access class members using object?",
+options:["->",".","::","*"],
+answer:".",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which storage class retains value between function calls?",
+options:["auto","register","static","extern"],
+answer:"static",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which keyword is used to prevent inheritance in C++?",
+options:["private","sealed","final","static"],
+answer:"final",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which function is automatically called when object is created?",
+options:["Destructor","Main","Constructor","Virtual Function"],
+answer:"Constructor",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which operator is used for dynamic memory allocation in C++?",
+options:["malloc","calloc","alloc","new"],
+answer:"new",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"What is the default return type of main() in C/C++?",
+options:["void","char","int","float"],
+answer:"int",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which concept hides implementation details from user?",
+options:[
+"Polymorphism",
+"Inheritance",
+"Abstraction",
+"Recursion"
+],
+answer:"Abstraction",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which loop is best when number of iterations is known?",
+options:["while","do while","for","nested while"],
+answer:"for",
+category:"C/C++",
+difficulty:"Medium"
+},
+
+{
+question:"Which keyword is used to inherit a base class publicly?",
+options:["extends","public","inherits","friend"],
+answer:"public",
+category:"C/C++",
+difficulty:"Medium"
+},
+{
+question:"Which normal form removes multivalued dependency?",
+options:["2NF","3NF","4NF","BCNF"],
+answer:"4NF",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which property ensures transaction completion fully or not at all?",
+options:["Consistency","Isolation","Durability","Atomicity"],
+answer:"Atomicity",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"BCNF is stronger version of?",
+options:["1NF","2NF","3NF","4NF"],
+answer:"3NF",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which join returns all rows from left table?",
+options:["INNER JOIN","RIGHT JOIN","LEFT JOIN","CROSS JOIN"],
+answer:"LEFT JOIN",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which SQL command undoes transaction changes?",
+options:["COMMIT","SAVEPOINT","ROLLBACK","MERGE"],
+answer:"ROLLBACK",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which indexing technique uses hashing?",
+options:["B Tree","Hash Index","Clustered Index","Primary Index"],
+answer:"Hash Index",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which concurrency problem causes inconsistent retrieval?",
+options:[
+"Deadlock",
+"Dirty Read",
+"Phantom Read",
+"Lost Update"
+],
+answer:"Phantom Read",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which SQL constraint prevents duplicate values?",
+options:["CHECK","NOT NULL","UNIQUE","DEFAULT"],
+answer:"UNIQUE",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which database model uses tables?",
+options:["Hierarchical","Relational","Network","Object"],
+answer:"Relational",
+category:"DBMS",
+difficulty:"Hard"
+},
+
+{
+question:"Which command creates a virtual table?",
+options:["INDEX","TRIGGER","VIEW","PROCEDURE"],
+answer:"VIEW",
+category:"DBMS",
+difficulty:"Hard"
+},
+{
+question:"Which scheduling algorithm may cause starvation?",
+options:["FCFS","Round Robin","Priority Scheduling","FIFO"],
+answer:"Priority Scheduling",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Banker's algorithm is used for?",
+options:[
+"Memory Allocation",
+"Deadlock Avoidance",
+"CPU Scheduling",
+"Paging"
+],
+answer:"Deadlock Avoidance",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Which memory allocation suffers external fragmentation?",
+options:["Paging","Segmentation","Virtual Memory","Cache"],
+answer:"Segmentation",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Thrashing mainly affects?",
+options:["CPU","Virtual Memory","Compiler","Cache"],
+answer:"Virtual Memory",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Which scheduling algorithm is preemptive?",
+options:["FCFS","SJF","Round Robin","FIFO"],
+answer:"Round Robin",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Which page replacement algorithm has least page faults theoretically?",
+options:["FIFO","LRU","Optimal","LFU"],
+answer:"Optimal",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Context switching occurs when?",
+options:[
+"Changing process",
+"Compiling program",
+"Booting system",
+"Formatting disk"
+],
+answer:"Changing process",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Which OS technique improves CPU utilization?",
+options:["Thrashing","Multiprogramming","Fragmentation","Spooling"],
+answer:"Multiprogramming",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Which state comes before terminated state?",
+options:["Ready","Running","Waiting","Blocked"],
+answer:"Running",
+category:"OS",
+difficulty:"Hard"
+},
+
+{
+question:"Mutex is mainly used for?",
+options:[
+"Memory allocation",
+"Synchronization",
+"Disk scheduling",
+"Paging"
+],
+answer:"Synchronization",
+category:"OS",
+difficulty:"Hard"
+},
+{
+question:"Which algorithm is used to detect cycle in a directed graph?",
+options:["Dijkstra","Kruskal","DFS","Prim"],
+answer:"DFS",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"What is the time complexity of Heap Sort?",
+options:["O(n²)","O(log n)","O(n log n)","O(n)"],
+answer:"O(n log n)",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Which data structure is used in recursion internally?",
+options:["Queue","Heap","Stack","Graph"],
+answer:"Stack",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Which algorithm finds Minimum Spanning Tree?",
+options:["Kruskal","Binary Search","DFS","Merge Sort"],
+answer:"Kruskal",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Which traversal is used in topological sorting?",
+options:["BFS","DFS","Binary Search","Level Order"],
+answer:"DFS",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"What is the worst case complexity of Quick Sort?",
+options:["O(log n)","O(n)","O(n²)","O(n log n)"],
+answer:"O(n²)",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Which data structure provides fastest search complexity?",
+options:["Linked List","Binary Search Tree","Hash Table","Queue"],
+answer:"Hash Table",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"AVL Tree is a?",
+options:["Heap","Balanced BST","Graph","Trie"],
+answer:"Balanced BST",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Which algorithm works on dynamic programming?",
+options:["Floyd Warshall","DFS","BFS","Selection Sort"],
+answer:"Floyd Warshall",
+category:"DSA",
+difficulty:"Hard"
+},
+
+{
+question:"Segment Tree query complexity is?",
+options:["O(n)","O(log n)","O(n²)","O(1)"],
+answer:"O(log n)",
+category:"DSA",
+difficulty:"Hard"
+},
+{
+question:"Which concept allows same operator for different purposes?",
+options:[
+"Abstraction",
+"Inheritance",
+"Operator Overloading",
+"Encapsulation"
+],
+answer:"Operator Overloading",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which keyword is used for runtime polymorphism?",
+options:["static","virtual","friend","inline"],
+answer:"virtual",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which function is called automatically when object is destroyed?",
+options:["Constructor","Destructor","Main","Friend"],
+answer:"Destructor",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which operator is used to access pointer object members?",
+options:[".","::","->","*"],
+answer:"->",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which concept binds data and functions together?",
+options:[
+"Polymorphism",
+"Encapsulation",
+"Inheritance",
+"Recursion"
+],
+answer:"Encapsulation",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which memory allocation function initializes memory to zero?",
+options:["malloc()","calloc()","realloc()","free()"],
+answer:"calloc()",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which inheritance creates ambiguity problem?",
+options:[
+"Single",
+"Hierarchical",
+"Multiple",
+"Multilevel"
+],
+answer:"Multiple",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which keyword allows function access outside class?",
+options:["friend","private","protected","virtual"],
+answer:"friend",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which concept is achieved using pure virtual functions?",
+options:[
+"Inheritance",
+"Abstraction",
+"Polymorphism",
+"Encapsulation"
+],
+answer:"Abstraction",
+category:"C/C++",
+difficulty:"Hard"
+},
+
+{
+question:"Which STL container stores unique sorted values?",
+options:["vector","queue","set","stack"],
+answer:"set",
+category:"C/C++",
+difficulty:"Hard"
+},
+{
+question:"Which protocol is used to map IP address to MAC address?",
+options:["DNS","ARP","HTTP","SMTP"],
+answer:"ARP",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which layer of TCP/IP model corresponds to OSI Transport layer?",
+options:[
+"Application",
+"Internet",
+"Transport",
+"Network Access"
+],
+answer:"Transport",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which routing protocol uses shortest path first algorithm?",
+options:["RIP","OSPF","BGP","FTP"],
+answer:"OSPF",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which protocol is used for secure remote login?",
+options:["Telnet","SSH","FTP","SMTP"],
+answer:"SSH",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which device separates collision domains?",
+options:["Hub","Repeater","Switch","Bridge"],
+answer:"Switch",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which addressing method sends data to all devices?",
+options:["Unicast","Broadcast","Multicast","Anycast"],
+answer:"Broadcast",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which protocol is used to test reachability in network?",
+options:["ICMP","ARP","DNS","DHCP"],
+answer:"ICMP",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which layer handles logical addressing?",
+options:["Physical","Data Link","Network","Transport"],
+answer:"Network",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"What is the default port number of HTTPS?",
+options:["21","25","80","443"],
+answer:"443",
+category:"Networks",
+difficulty:"Hard"
+},
+
+{
+question:"Which topology has highest redundancy?",
+options:["Bus","Star","Ring","Mesh"],
+answer:"Mesh",
+category:"Networks",
+difficulty:"Hard"
+},
+
+];
+
+/* ENTER APP */
+
+function enterApp(){
+
+const input =
+document.getElementById("playerName").value.trim();
+
+if(input === ""){
+
+alert("Please enter your name");
+return;
+}
+
+playerName = input;
+
+document.getElementById("landingPage")
+.classList.add("hidden");
+
+document.getElementById("startPage")
+.classList.remove("hidden");
+
+document.getElementById("welcomeText")
+.innerText = `Welcome ${playerName} 🚀`;
+
+showHighScore();
+}
+
+/* START QUIZ */
+
+function startQuiz(category){
+
+selectedCategory = category;
+
+const difficulty =
+document.getElementById("difficulty").value;
+
+currentQuestions = questions.filter(q =>
+
+q.category === category &&
+q.difficulty === difficulty
+
+);
+
+if(currentQuestions.length === 0){
+
+alert("Questions not added yet.");
+return;
+}
+
+currentQuestions = shuffle(currentQuestions);
+
+currentIndex = 0;
+
+score = 0;
+
+document.getElementById("startPage")
+.classList.add("hidden");
+
+document.getElementById("quizPage")
+.classList.remove("hidden");
+
+loadQuestion();
+}
+
+/* LOAD QUESTION */
+
+function loadQuestion(){
+
+resetTimer();
+
+const q = currentQuestions[currentIndex];
+
+document.getElementById("questionCount")
+.innerText =
+`Question ${currentIndex + 1}/${currentQuestions.length}`;
+
+document.getElementById("question")
+.innerText = q.question;
+
+const optionsDiv =
+document.getElementById("options");
+
+optionsDiv.innerHTML = "";
+
+q.options.forEach(option => {
+
+const btn =
+document.createElement("button");
+
+btn.classList.add("option-btn");
+
+btn.innerText = option;
+
+btn.onclick =
+() => checkAnswer(btn, option);
+
+optionsDiv.appendChild(btn);
+
+});
+
+startTimer();
+}
+
+/* CHECK ANSWER */
+
+function checkAnswer(button, selected){
+
+clearInterval(timer);
+
+const q = currentQuestions[currentIndex];
+
+const buttons =
+document.querySelectorAll(".option-btn");
+
+buttons.forEach(btn => btn.disabled = true);
+
+if(selected === q.answer){
+
+button.classList.add("correct");
+
+score++;
+
+playSound(true);
+
+}else{
+
+button.classList.add("wrong");
+
+playSound(false);
+
+buttons.forEach(btn => {
+
+if(btn.innerText === q.answer){
+
+btn.classList.add("correct");
+}
+
+});
+}
+
+setTimeout(() => {
+
+currentIndex++;
+
+if(currentIndex < currentQuestions.length){
+
+loadQuestion();
+
+}else{
+
+showResults();
+}
+
+},1400);
+}
+
+/* RESULTS */
+
+function showResults(){
+
+document.getElementById("quizPage")
+.classList.add("hidden");
+
+document.getElementById("resultPage")
+.classList.remove("hidden");
+
+const percentage =
+Math.round((score / currentQuestions.length) * 100);
+
+document.getElementById("finalScore")
+.innerText =
+`${score}/${currentQuestions.length}`;
+
+document.getElementById("correctCount")
+.innerText = score;
+
+document.getElementById("wrongCount")
+.innerText =
+currentQuestions.length - score;
+
+document.getElementById("percentage")
+.innerText = `${percentage}%`;
+
+let grade = "";
+let msg = "";
+
+if(percentage >= 90){
+
+grade = "Grade A+";
+msg = "Outstanding Performance 🚀";
+
+}else if(percentage >= 70){
+
+grade = "Grade A";
+msg = "Strong Technical Knowledge ⚡";
+
+}else if(percentage >= 50){
+
+grade = "Grade B";
+msg = "Good Attempt 💡";
+
+}else{
+
+grade = "Grade C";
+msg = "Keep Practicing 📚";
+}
+
+document.getElementById("grade")
+.innerText = grade;
+
+document.getElementById("message")
+.innerText = msg;
+
+document.getElementById("badge")
+.innerHTML =
+`🏆 ${playerName} scored ${score}/${currentQuestions.length}
+in ${selectedCategory}`;
+
+saveHighScore(score);
+
+saveLeaderboard();
+showLeaderboard();
+}
+
+/* TIMER */
+
+function startTimer(){
+
+timeLeft = 30;
+
+document.getElementById("timer")
+.innerText = timeLeft;
+
+const progress =
+document.getElementById("progressBar");
+
+progress.style.width = "100%";
+
+timer = setInterval(() => {
+
+timeLeft--;
+
+document.getElementById("timer")
+.innerText = timeLeft;
+
+progress.style.width =
+`${(timeLeft / 30) * 100}%`;
+
+if(timeLeft <= 0){
+
+clearInterval(timer);
+
+autoNext();
+}
+
+},1000);
+}
+
+function resetTimer(){
+
+clearInterval(timer);
+}
+
+function autoNext(){
+
+const buttons =
+document.querySelectorAll(".option-btn");
+
+buttons.forEach(btn => {
+
+btn.disabled = true;
+
+if(
+btn.innerText ===
+currentQuestions[currentIndex].answer
+){
+btn.classList.add("correct");
+}
+});
+
+setTimeout(() => {
+
+currentIndex++;
+
+if(currentIndex < currentQuestions.length){
+
+loadQuestion();
+
+}else{
+
+showResults();
+}
+
+},1200);
+}
+
+/* RETAKE */
+
+function retakeQuiz(){
+
+document.getElementById("resultPage")
+.classList.add("hidden");
+
+document.getElementById("startPage")
+.classList.remove("hidden");
+}
+
+/* NAVIGATION */
+
+function goToLanding(){
+
+document.getElementById("startPage")
+.classList.add("hidden");
+
+document.getElementById("landingPage")
+.classList.remove("hidden");
+}
+
+function goToCategories(){
+
+clearInterval(timer);
+
+document.getElementById("quizPage")
+.classList.add("hidden");
+
+document.getElementById("resultPage")
+.classList.add("hidden");
+
+document.getElementById("startPage")
+.classList.remove("hidden");
+}
+
+/* SHUFFLE */
+
+function shuffle(arr){
+
+return [...arr]
+.sort(() => Math.random() - 0.5);
+}
+
+/* HIGH SCORE */
+
+function saveHighScore(score){
+
+const high =
+localStorage.getItem("quizHighScore") || 0;
+
+if(score > high){
+
+localStorage.setItem("quizHighScore", score);
+}
+
+showHighScore();
+}
+
+function showHighScore(){
+
+const high =
+localStorage.getItem("quizHighScore") || 0;
+
+document.getElementById("highScoreText")
+.innerText =
+`🏅 Highest Score: ${high}`;
+}
+
+/* LEADERBOARD */
+
+function saveLeaderboard(){
+
+let leaderboard =
+JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+leaderboard.push({
+name:playerName,
+score:score
+});
+
+leaderboard.sort((a,b)=>b.score-a.score);
+
+leaderboard = leaderboard.slice(0,5);
+
+localStorage.setItem(
+"leaderboard",
+JSON.stringify(leaderboard)
+);
+}
+
+function showLeaderboard(){
+
+const leaderboard =
+JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+const container =
+document.getElementById("leaderboardList");
+
+container.innerHTML = "";
+
+leaderboard.forEach((item,index)=>{
+
+container.innerHTML += `
+
+<div class="leaderboard-item">
+
+${index + 1}. ${item.name}
+- ${item.score}
+
+</div>
+
+`;
+});
+}
+
+/* THEME */
+
+function toggleTheme(){
+
+document.body.classList.toggle("light-mode");
+}
+
+/* SOUND */
+
+function playSound(correct){
+
+const audio = new Audio(
+
+correct
+? "https://www.soundjay.com/buttons/sounds/button-4.mp3"
+: "https://www.soundjay.com/buttons/sounds/button-10.mp3"
+
+);
+
+audio.play();
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+document.addEventListener("keydown",(e)=>{
+
+const buttons =
+document.querySelectorAll(".option-btn");
+
+if(e.key >= 1 && e.key <= 4){
+
+const index = Number(e.key) - 1;
+
+if(buttons[index]){
+
+buttons[index].click();
+}
+}
+});
+
+</script>
+
+</body>
+</html>

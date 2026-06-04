@@ -1,0 +1,302 @@
+/* Landing.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html, body, #root{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  font-family:"Poppins", sans-serif;
+  background:#04131f;
+}
+
+/* Fullscreen Container */
+
+.landing-container{
+  position:relative;
+  width:100vw;
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  overflow:hidden;
+}
+
+/* Animated Gradient Background */
+
+.gradient-bg{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(circle at top left, rgba(0,255,200,0.25), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(0,140,255,0.25), transparent 35%),
+    linear-gradient(135deg,#02131d,#06263b,#073b4c,#0b6e4f);
+
+  background-size:400% 400%;
+
+  animation:gradientMove 12s ease infinite;
+}
+
+/* Moving Gradient */
+
+@keyframes gradientMove{
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+}
+
+/* Floating 3D Shapes */
+
+.floating-shapes span{
+  position:absolute;
+  display:block;
+
+  border-radius:30px;
+
+  backdrop-filter:blur(12px);
+
+  background:rgba(255,255,255,0.06);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.2);
+
+  animation:float 15s linear infinite;
+}
+
+/* Shape Sizes */
+
+.floating-shapes span:nth-child(1){
+  width:220px;
+  height:220px;
+  left:5%;
+  top:15%;
+  animation-duration:18s;
+}
+
+.floating-shapes span:nth-child(2){
+  width:120px;
+  height:120px;
+  right:12%;
+  top:18%;
+  animation-duration:14s;
+}
+
+.floating-shapes span:nth-child(3){
+  width:180px;
+  height:180px;
+  left:15%;
+  bottom:10%;
+  animation-duration:20s;
+}
+
+.floating-shapes span:nth-child(4){
+  width:100px;
+  height:100px;
+  right:18%;
+  bottom:18%;
+  animation-duration:16s;
+}
+
+.floating-shapes span:nth-child(5){
+  width:140px;
+  height:140px;
+  top:45%;
+  right:40%;
+  animation-duration:22s;
+}
+
+/* Floating Animation */
+
+@keyframes float{
+  0%{
+    transform:translateY(0px) rotate(0deg);
+  }
+
+  50%{
+    transform:translateY(-30px) rotate(8deg);
+  }
+
+  100%{
+    transform:translateY(0px) rotate(0deg);
+  }
+}
+
+/* Grid Overlay */
+
+.grid-overlay{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size:60px 60px;
+
+  mask-image:radial-gradient(circle at center, black 45%, transparent 90%);
+}
+
+/* Main Content */
+
+.landing-content{
+  position:relative;
+  z-index:10;
+  padding:20px;
+
+  animation:fadeUp 1.5s ease;
+}
+
+/* Title */
+
+.main-title{
+  font-size:4.2rem;
+  font-weight:600;
+  color:#ffffff;
+
+  letter-spacing:1px;
+}
+
+.main-title span{
+  color:#34d399;
+}
+
+/* Subtitle */
+
+.subtitle{
+  margin-top:20px;
+
+  color:#d1d5db;
+
+  font-size:1.1rem;
+
+  max-width:700px;
+
+  line-height:1.8;
+}
+
+/* Button */
+
+.explore-btn{
+  margin-top:38px;
+
+  padding:15px 36px;
+
+  border:none;
+  border-radius:50px;
+
+  background:linear-gradient(
+    135deg,
+    #06b6d4,
+    #10b981
+  );
+
+  color:white;
+
+  font-size:1rem;
+  font-weight:500;
+
+  cursor:pointer;
+
+  transition:0.4s ease;
+}
+
+/* Hover */
+
+.explore-btn:hover{
+  transform:translateY(-5px) scale(1.03);
+
+  box-shadow:
+    0 10px 30px rgba(6,182,212,0.35),
+    0 10px 35px rgba(16,185,129,0.35);
+}
+
+/* Fade Animation */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:992px){
+
+  .main-title{
+    font-size:3.3rem;
+  }
+
+  .subtitle{
+    font-size:1rem;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .main-title{
+    font-size:2.4rem;
+    line-height:1.3;
+  }
+
+  .subtitle{
+    font-size:0.92rem;
+    padding:0 10px;
+  }
+
+  .explore-btn{
+    padding:13px 28px;
+    font-size:0.9rem;
+  }
+
+  .floating-shapes span:nth-child(1){
+    width:140px;
+    height:140px;
+  }
+
+  .floating-shapes span:nth-child(3){
+    width:120px;
+    height:120px;
+  }
+
+}
+
+@media(max-width:400px){
+
+  .main-title{
+    font-size:2rem;
+  }
+
+  .subtitle{
+    font-size:0.85rem;
+  }
+
+}
